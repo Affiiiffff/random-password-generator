@@ -86,19 +86,35 @@ function Criteria() {
       "What would you like the total length of the password to be? Please type a number in numeric between 8-128"
     )
   );
-
-  if (confirm("Would you like to include special characters?")) {
-    newPassword = newPassword.concat(specialCharacters);
+  if (characterLength < 8 || characterLength > 128) {
+    alert("Please enter a value between 8-128!");
+    Criteria();
   }
 
-  if (confirm("Would you like lower case letters? "))
+  var atLeastOneCharacterTypeChosen = false;
+  if (confirm("Would you like to include special characters?")) {
+    newPassword = newPassword.concat(specialCharacters);
+    var atLeastOneCharacterTypeChosen = true;
+  }
+
+  if (confirm("Would you like lower case letters? ")) {
     newPassword = newPassword.concat(lowerCase);
+    var atLeastOneCharacterTypeChosen = true;
+  }
 
-  if (confirm("Would you like upper case letters? "))
+  if (confirm("Would you like upper case letters? ")) {
     newPassword = newPassword.concat(upperCase);
+    var atLeastOneCharacterTypeChosen = true;
+  }
 
-  if (confirm("Would you like to include numbers in your password? "))
+  if (confirm("Would you like to include numbers in your password? ")) {
     newPassword = newPassword.concat(numbers);
+    var atLeastOneCharacterTypeChosen = true;
+  }
+  if (atLeastOneCharacterTypeChosen === false) {
+    alert("One character type must selected!");
+    Criteria();
+  }
 }
 
 function generatePassword() {
